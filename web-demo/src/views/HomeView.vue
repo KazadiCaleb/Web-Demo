@@ -1,18 +1,90 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <section class="hero is-medium is-dark mb-6">
+      <div class="hero-body has-text-centered">
+        <p class="title mb-6">
+          Welcome To My Store 
+        </p>
+        <p class="subtitle">
+          We Sell The best Products In The World
+        </p>
+      </div>
+    </section>
+
+    <div class="colum is-multiline">
+      <div class="column is-12">
+        <h2 class="is-size-2 has-text-centered">Latest Products</h2>
+      </div>
+    </div>
+
+    <div
+      class="colum is-3"
+      v-for="product in latestProducts"
+      :key="product.id"
+    >
+      <div class="box">
+        <figure class="image mb-4">
+          <img :src="product.image" alt="">
+        </figure>
+        
+        <h3 class="is-size-4">{{ product.title }}</h3>
+        <p class="is-size-6 has-text-grey">R{{ product.price }}</p>
+
+        View details
+
+        <footer class="card-footer">
+          <p class="card-footer-item"></p>
+            <span class="icon">
+              <i class="fas fa-star"></i>
+            </span>
+        </footer>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import axios from "axios";
 
 export default {
   name: 'HomeView',
+  data() {
+    return {
+      latestProducts: []
+    }
+  },
   components: {
-    HelloWorld
+  },
+  mounted() {
+    this.getLatestProducts()
+  },
+  methods: {
+    getLatestProducts() {
+      axios
+       .get("https://fakestoreapi.com/products")
+       .then(response => {
+          this.latestProducts = response.data;
+        })
+       .catch(error => {
+          console.log(error);
+        });
+    }
   }
 }
 </script>
+
+<style scoped>
+.image {
+  margin-top: -1.25rem;
+  margin-left: -1.25rem;
+  margin-right: -1.25rem;
+}
+.box {
+  margin-top: 5.25rem;
+  margin-left: 8.25rem;
+  margin-right: 8.25rem;
+  margin-bottom: 5.25rem;
+  padding: 1.25rem;
+  border-radius: 2.25rem;
+}
+</style>
