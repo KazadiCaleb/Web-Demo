@@ -29,9 +29,9 @@
         
         <h3 class="is-size-4">{{ product.title }}</h3>
         <p class="is-size-6 has-text-grey">R{{ product.price }}</p>
-
-        View details
-
+        <p class="is-size-6 has-text-grey">{{ product.description }}</p>
+        
+        <button @click="addToCart(product)">Add to Cart</button>
         <footer class="card-footer">
           <p class="card-footer-item"></p>
             <span class="icon">
@@ -45,7 +45,6 @@
 
 <script>
 import axios from "axios";
-
 export default {
   name: 'HomeView',
   data() {
@@ -68,7 +67,8 @@ export default {
        .catch(error => {
           console.log(error);
         });
-    }
+      }
+  
   }
 }
 </script>
@@ -81,10 +81,24 @@ export default {
 }
 .box {
   margin-top: 5.25rem;
-  margin-left: 8.25rem;
-  margin-right: 8.25rem;
-  margin-bottom: 5.25rem;
-  padding: 1.25rem;
-  border-radius: 2.25rem;
+  margin-left: 5.25rem;
+  margin-right: 5.25rem;
+}
+.box {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 90%;
+  max-width: 1000px;
+  margin: 10vh auto;
+}
+
+.box {
+  border-radius: 16px;
+  box-shadow: 0 30px 30px -25px rgba(#4133B7, .25);
+  max-width: 500px;
 }
 </style>
