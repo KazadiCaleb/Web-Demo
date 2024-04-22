@@ -23,7 +23,7 @@
       <h2 class="is-size-2 has-text-centered">Cart</h2>
     </div>
   </div>
-  <<div class="products">
+  <div class="products">
     <div v-for="product in cart"
     :key="product.id">
       {{ product.title }}
