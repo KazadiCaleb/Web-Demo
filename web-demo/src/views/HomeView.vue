@@ -17,7 +17,24 @@
       </div>
     </div>
 
-    <div
+    <div v-if="page === 'cart'">
+    <div class="colum is-multiline">
+    <div class="column is-12">
+      <h2 class="is-size-2 has-text-centered">Cart</h2>
+    </div>
+  </div>
+  <<div class="products">
+    <div v-for="product in cart"
+    :key="product.id">
+      {{ product.title }}
+      <img :src="product.image" />
+      <div>{{ product.price }}</div>
+      <button v-on:click="removeFromCart (products)">Remove</button>
+  </div>
+  </div>
+</div>
+  
+   <div
       class="colum is-3"
       v-for="product in latestProducts"
       :key="product.id"
@@ -30,8 +47,8 @@
         <h3 class="is-size-4">{{ product.title }}</h3>
         <p class="is-size-6 has-text-grey">R{{ product.price }}</p>
         <p class="is-size-6 has-text-grey">{{ product.description }}</p>
-        
-        <button @click="addToCart(product)">Add to Cart</button>
+      
+        <button v-on:click="addToCart(product)">Add to Cart</button>
         <footer class="card-footer">
           <p class="card-footer-item"></p>
             <span class="icon">
@@ -49,7 +66,9 @@ export default {
   name: 'HomeView',
   data() {
     return {
-      latestProducts: []
+      page: "cart",
+      latestProducts: [],
+      cart: []
     }
   },
   components: {
@@ -58,6 +77,14 @@ export default {
     this.getLatestProducts()
   },
   methods: {
+    addToCart(product) {
+      this.cart.push(product);
+      console.log(this.cart);
+    },
+    removeFromCart(product) {
+      this.cart.splice(this.cart.indexOf(product), 1);
+      console.log(this.cart);
+    },
     getLatestProducts() {
       axios
        .get("https://fakestoreapi.com/products")
@@ -67,9 +94,8 @@ export default {
        .catch(error => {
           console.log(error);
         });
-      }
-  
   }
+}
 }
 </script>
 
