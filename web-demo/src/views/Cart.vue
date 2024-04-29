@@ -1,40 +1,35 @@
 <template>
-  <div v-if="page === 'cart'">
     <div class="colum is-multiline">
     <div class="column is-12">
       <h2 class="is-size-2 has-text-centered">Cart</h2>
     </div>
   </div>
-  <div class="products">
-    <div v-for="product in cart"
+    <div 
+    class="product"
+    v-for="product in cart" 
     :key="product.id">
-      {{ product.title }}
-      <img :src="product.image" />
+      <p>{{ product.title }}</p>
+      <img :src="product.image" alt="">
       <div>{{ product.price }}</div>
-      <button v-on:click="removeFromCart (products)">Remove</button>
-  </div>
-  </div>
-</div> 
+      <button @click="removeFromCart(item)">Remove</button>
+  </div> 
 </template>
 
 <script>
 export default {
+  name: 'Cart',
   data() {
     return {
-      page: "cart",
       latestProducts: [],
       cart: []
     }
   },
-  components: {
+  computed: {
+    cart() {
+      return this.$store.state.cart;
+    }
   },
-  methods: {
-    removeFromCart(product) {
-      this.cart.splice(this.cart.indexOf(product), 1);
-      console.log(this.cart);
-    },
   }
-}
 </script>
 
 
