@@ -6,11 +6,11 @@
   </div>
     <div 
     class="product"
-    v-for="product in cart" 
-    :key="product.id">
-      <p>{{ product.title }}</p>
-      <img :src="product.image" alt="">
-      <div>{{ product.price }}</div>
+    v-for="item in cart" 
+    :key="item.id">
+      <p>{{ item.title }}</p>
+      <img :src="item.image" alt="">
+      <div>{{ item.price }}</div>
       <button @click="removeFromCart(item)">Remove</button>
   </div> 
 </template>
@@ -21,7 +21,8 @@ export default {
   data() {
     return {
       latestProducts: [],
-      cart: []
+      cart: [],
+      item: []
     }
   },
   computed: {

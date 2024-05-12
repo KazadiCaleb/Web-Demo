@@ -44,7 +44,8 @@ export default {
   data() {
     return {
       latestProducts: [],
-      cart: []
+      cart: [],
+      item: [],
     }
   },
   components: {
