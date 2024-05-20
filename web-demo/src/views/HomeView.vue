@@ -9,9 +9,9 @@
           We Sell The best Products In The World
         </p>
       </div>
-    </section>
+ </section>
 
-    <div class="colum is-multiline">
+   <div class="colum is-multiline">
       <div class="column is-12">
         <h2 class="is-size-2 has-text-centered">Latest Products</h2>
       </div>
@@ -39,27 +39,22 @@
 
 <script>
 import axios from "axios";
+import Cart from "../views/Cart.vue";
 export default {
   name: 'HomeView',
   data() {
     return {
       latestProducts: [],
-      cart: [],
-      item: [],
+      cart: []
     }
   },
   components: {
+    Cart
   },
   mounted() {
     this.getLatestProducts()
   },
   methods: {
-    addToCart(product) {
-      this.$store.dispatch('addToCart', {
-        product: this.products,
-        quantity: 1
-      }) 
-    },
     getLatestProducts() {
       axios
        .get("https://fakestoreapi.com/products")
@@ -68,10 +63,15 @@ export default {
         })
        .catch(error => {
           console.log(error);
-        });
-  }
-}
-}
+        }); 
+  },
+  addToCart(product) {
+      this.$store.dispatch('addProductToCart', {
+        product: this.product,
+        quantity: 1
+      }) 
+    },
+}}
 </script>
 
 <style scoped>
